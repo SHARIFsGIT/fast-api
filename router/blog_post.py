@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Body
 from pydantic import BaseModel
 from typing import Optional
 
@@ -21,6 +21,7 @@ def create_blog(blog: BlogModel, id: int, version: int = 1):
         'version': version
         }
 
+# Query parameter
 @router.post('/new/{id}/comment')
 def create_comment(blog: BlogModel, 
                    id: int, 
@@ -29,10 +30,13 @@ def create_comment(blog: BlogModel,
                                            description= 'Some description for comment_id',
                                            alias= 'commentId',
                                            deprecated= True
-                                        )
+                                        ),
+# Body parameter
+                    content: str = Body(..., min_length= 10, max_length= 15, regex= '^[a-z\s]*$') # ... or Ellipsis
                 ):
-    return{
+    return{ 
         'blog': blog,
         'id': id,
-        'comment_id': comment_id
+        'comment_id': comment_id,
+        'content': content
     }
