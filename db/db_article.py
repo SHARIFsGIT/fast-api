@@ -4,7 +4,7 @@ from sqlalchemy.orm.session import Session
 
 def create_article(db: Session, request: ArticleBase):
     new_article = DbArticle(
-        titles =request.title,
+        title =request.title,
         content = request.content,
         published = request.published,
         user_id = request.creator_id

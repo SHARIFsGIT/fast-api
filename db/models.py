@@ -16,8 +16,8 @@ class DbUser(Base):
 class DbArticle(Base):
     __tablename__ = 'articles'
     id = Column(Integer, primary_key=True, index= True)
-    titles = Column(String)
+    title = Column(String)
     content = Column(String)
     published = Column(Boolean)
     user_id = Column(Integer, ForeignKey('users.id'))
-    user = relationship("DbUser", back_populates='items')
+    user = relationship('DbUser', back_populates='items')
