@@ -11,7 +11,8 @@ router = APIRouter(
 )
 
 # Create user
-@router.post('/', response_model=UserDisplay) #response_model helps to display the user information
+@router.post('/', response_model=UserDisplay) 
+#response_model helps to display the user information
 def create_user(request: UserBase, db: Session= Depends(get_db)):
     return db_user.create_user(db, request)
 
