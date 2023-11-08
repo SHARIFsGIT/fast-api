@@ -5,6 +5,7 @@ from fastapi import status
 from exception import StoryException
 from router import blog_get
 from router import blog_post
+from router import product
 from db import models 
 from db.database import engine
 from router import user
@@ -13,6 +14,7 @@ from router import article
 app = FastAPI()
 app.include_router(user.router)
 app.include_router(article.router)
+app.include_router(product.router)
 app.include_router(blog_get.router)
 app.include_router(blog_post.router)
 
