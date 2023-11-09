@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Response
-from fastapi.responses import HTMLResponse
+from typing import List, Optional
+from fastapi import APIRouter, Header
+from fastapi.responses import HTMLResponse, Response
 from fastapi.responses import PlainTextResponse
 
 router = APIRouter(
@@ -16,6 +17,15 @@ def get_all_products():
     # To show as a plain text
     data = " ".join(products)
     return Response(content= data, media_type= "text/plain")
+
+# Headers are added
+@router.get('/withheader')
+def get_products(
+    response: Response,
+    custom_header: Optional[List[str]] = Header(None)
+    ):
+    response.headers['custom_response_header'] = " and ".join(custom_header)
+    return products
 
 @router.get('/{id}', responses= {
     200: {
