@@ -10,6 +10,8 @@ from db import models
 from db.database import engine
 from router import user
 from router import article
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 app.include_router(user.router)
@@ -38,3 +40,16 @@ def custom_handler(request: Request, exception: StoryException):
     return PlainTextResponse(str(exception), status_code=status.HTTP_400_BAD_REQUEST)
 
 models.Base.metadata.create_all(engine)
+
+# CORS middleware added
+origins=[
+    'http://localhost:3000'
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= origins,
+    allow_credentials= True,
+    allow_methods= ['*'],
+    allow_headers= ['*']
+)
