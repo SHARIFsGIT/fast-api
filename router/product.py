@@ -1,7 +1,6 @@
 from typing import List, Optional
 from fastapi import APIRouter, Cookie, Form, Header
-from fastapi.responses import HTMLResponse, Response
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import HTMLResponse, Response, PlainTextResponse
 
 router = APIRouter(
     prefix='/product',
