@@ -20,12 +20,12 @@ def get_all_users(db: Session):
     return db.query(DbUser).all()
 
 # to read from database one user
-def get_user(db: Session, id: int):
-    user = db.query(DbUser).filter(DbUser.id == id).first()
+def get_user_by_username(db: Session, username: str):
+    user = db.query(DbUser).filter(DbUser.username == username).first()
     # Handle any exception
     if not user:
-        raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail= f'User with {id} not found')
-    return 
+        raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail= f'User with {username} not found')
+    return user
 # for more filter: return db.query(DbUser).filter(DbUser.id == id).filter(DbUser.email == email).first()
 
 # to update user
